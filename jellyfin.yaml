@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin-deployment
+  namespace: jellyfin
+spec:
+  selector:
+    matchLabels:
+      app: jellyfin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      containers:
+      - env:
+        - name: JELLYFIN_PublishedServerUrl 
+          valueFrom:
+            secretKeyRef:
+              name: jellyfin-secrets
+              key: SERVER_URL
+        - name: PGID
+          value: "\x36\x35\x35\x34\x31"
+        - name: PUID
+          value: "\x31\x30\x34\x34"
+        - name: TZ
+          value: Europe/Zurich
+        securityContexxt:
+          privileged: false
+        name: jellyfin
+        image: ghcr.io/linuxserver/jellyfin
+        ports:
+        - containerPort: 8096
+          name: http-tcp
+          protocol: TCP
+        - containerPort: 8920
+          name: https-tcp
+          protocol: TCP
+        - containerPort: 1900
+          name: dlna-udp
+          protocol: UDP
+        - containerPort: 7359
+          name: discovery-udp
+          protocol: UDP
+        volumeMounts:
+        - mountPath: /home/jellyfin
+          name: jellyfin-volume
+        - mountPath: /config
+          name: jellyfin-config
+        - mountPath: /data
+          name: jellyfin-data
+      volumes:
+      - name: jellyfin-volume
+        persistentVolumeClaim:
+          claimName: jellyfin-pvc
+      - name: jellyfin-config
+        persistentVolumeClaim:
+          claimName: jellyfin-config-pvc
+      - name: jellyfin-data
+        persistentVolumeClaim:
+          claimName: jellyfin-data-pvc
