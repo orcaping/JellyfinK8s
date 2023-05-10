@@ -1,2 +1,10 @@
 *.py
-*.yaml
+
+# HIDE API KEYS
+telegram_bot/config.py
+
+# PREVENT UNECESSARY BLOATING
+telegram_bot/__pycache__/
+
+# ENSURE SECRETS AREN'T PUSHED TO GIT
+jellyfin-secret.yaml
