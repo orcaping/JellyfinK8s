@@ -15,11 +15,11 @@ spec:
     spec:
       containers:
       - env:
-        - name: JELLYFIN_PublishedServerUrl 
-          valueFrom:
-            secretKeyRef:
-              name: jellyfin-secrets
-              key: SERVER_URL
+        # - name: JELLYFIN_PublishedServerUrl 
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: jellyfin-secrets
+        #       key: SERVER_URL
         - name: PGID
           value: "1000"
         - name: PUID
