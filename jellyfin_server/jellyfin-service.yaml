@@ -6,8 +6,7 @@ metadata:
 spec:
   selector:
     app: jellyfin
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 8096
       targetPort: 8096
-      nodePort: 30000
