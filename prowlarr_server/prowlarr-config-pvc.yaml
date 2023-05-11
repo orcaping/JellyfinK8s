@@ -4,6 +4,7 @@ metadata:
   name: prowlarr-config-pvc
   namespace: jellyfin
 spec:
+  storageClassName: jellyfin-storageclass
   accessModes:
     - ReadWriteMany
   resources:

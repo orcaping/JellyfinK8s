@@ -4,6 +4,7 @@ metadata:
   name: radarr-config-pvc
   namespace: jellyfin
 spec:
+  storageClassName: jellyfin-storageclass
   accessModes:
     - ReadWriteMany
   resources:

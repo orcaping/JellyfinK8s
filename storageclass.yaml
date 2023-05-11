@@ -1,0 +1,11 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: jellyfin-storageclass
+  namespace: jellyfin
+reclaimPolicy: Retain
+provisioner: docker.io/hostpath
+allowVolumeExpansion: true
+mountOptions:
+  - debug
+volumeBindingMode: Immediate

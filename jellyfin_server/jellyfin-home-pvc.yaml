@@ -4,6 +4,7 @@ metadata:
   name: jellyfin-pvc
   namespace: jellyfin
 spec:
+  storageClassName: jellyfin-storageclass
   accessModes:
     - ReadWriteMany
   resources:
