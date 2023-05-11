@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr-deployment
+  namespace: jellyfin
+spec:
+  selector:
+    matchLabels:
+      app: radarr
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+      - env:  
+        - name: JELLYFIN_URL
+          value: "http://jellyfin-service:8096"
+        - name: PGID
+          value: "1000"
+        - name: PUID
+          value: "1000"
+        - name: TZ
+          value: Europe/Zurich
+        securityContext:
+          privileged: false
+        name: radarr
+        image: lscr.io/linuxserver/radarr:latest
+        ports:
+        - containerPort: 7878
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /config
+          name: radarr-config
+        - mountPath: /movies
+          name: radarr-movies
+        - mountPath: /downloads
+          name: radarr-downloads
+      volumes:
+      - name: radarr-config
+        persistentVolumeClaim:
+          claimName: radarr-config-pvc
+      - name: radarr-movies
+        persistentVolumeClaim:
+          claimName: radarr-movies-pvc
+      - name: radarr-downloads
+        persistentVolumeClaim:
+          claimName: radarr-downloads-pvc
