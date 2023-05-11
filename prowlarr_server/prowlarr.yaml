@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr-deployment
+  namespace: jellyfin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      containers:
+        - name: prowlarr
+          image: lscr.io/linuxserver/prowlarr  
+          volumeMounts:
+          - mountPath: /config
+            name: prowlarr-volume
+          ports:
+            - containerPort: 9696 
+          env:
+          - name: SONARR_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: prowlarr-secrets
+                key: SONARR_API_KEY
+          - name: RADARR_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: prowlarr-secrets
+                key: RADARR_API_KEY
+          - name: JELLYFIN_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: prowlarr-secrets
+                key: JELLYFIN_API_KEY
+          - name: PGID
+            value: "1000"
+          - name: PUID
+            value: "1000"
+          - name: TZ
+            value: Europe/Zurich
+      volumes:
+      - name: prowlarr-volume
+        persistentVolumeClaim:
+          claimName: prowlarr-config-pvc
