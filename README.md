@@ -31,7 +31,7 @@ ApiKeys for both Applications can be found in the respective UI under Settings/G
 
 
 # Applying all resources
-kubectl create -n jellyfin <br>
+kubectl create ns jellyfin <br>
 kubectl apply -f jellyfin_server/ <br>
 kubectl apply -f prowlarr_server/ <br>
 kubectl apply -f sonarr_server/ <br>
@@ -42,4 +42,8 @@ kubectl delete -f jellyfin_server/ <br>
 kubectl delete -f prowlarr_server/ <br>
 kubectl delete -f radarr_server/ <br>
 kubectl delete -f sonarr_server/ <br>
-kubectl delete -n jellyfin <br>
+kubectl delete ns jellyfin <br>
+
+
+# Scan for Vulnerabilites
+/Users/mainuser/go/bin/kubesec scan xx.yaml
