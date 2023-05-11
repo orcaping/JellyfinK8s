@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: jellyfin-data-pvc
+  name: jellyfin-tvshows-pvc
   namespace: jellyfin
 spec:
   accessModes:
