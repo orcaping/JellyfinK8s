@@ -63,3 +63,17 @@ After succesfull installation qBittorrent should be reachable under: http://192.
 
 ## Helpful Commands for Troubleshooting
 ```sudo systemctl (status/start/stop)```
+
+# Applying all resources
+kubectl create -n jellyfin
+kubectl apply -f jellyfin_server/
+kubectl apply -f prowlarr_server/
+kubectl apply -f sonarr_server/
+kubectl apply -f radarr_server/
+
+# Deleting all resources
+kubectl delete -f jellyfin_server/
+kubectl delete -f prowlarr_server/
+kubectl delete -f radarr_server/
+kubectl delete -f sonarr_server/
+kubectl delete -n jellyfin
