@@ -4,9 +4,9 @@ metadata:
   name: jellyfin-service
   namespace: jellyfin
 spec:
-  type: NodePort
   selector:
     app: jellyfin
+  type: NodePort
   ports:
     - port: 8096
       targetPort: 8096
