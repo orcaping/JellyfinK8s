@@ -7,4 +7,5 @@ telegram_bot/config.py
 telegram_bot/__pycache__/
 
 # ENSURE SECRETS AREN'T PUSHED TO GIT
-jellyfin-secret.yaml
+jellyfin_server/jellyfin-secrets.yaml
+prowlarr_server/prowlarr-secrets.yaml
