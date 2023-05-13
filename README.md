@@ -3,7 +3,6 @@ This is an installation guide for a containerized Jellyfin Stack available for K
 <br>
 
 ## Prerequisits
----
 This guide assumes that you have setup your cluster on Ubuntu 18.04 nodes.
 ```"Please ensure you have root permissions to the system"```
 ### Setup qBittorrent
@@ -14,11 +13,9 @@ connecting your downloader to Radarr & Sonarr is no harder then connecting over 
 > security: when possible use dedicated credentials to authenticate to your torrent client.
 
 ## Jellyfin
----
 
 
 ## Sonarr & Radarr
----
 Both applications have a near identical UI and require the same configuration steps. Keep in mind Sonarr is used for Series whereas Radarr is used for Movies.
 
 ### Adding Downlaod Client
@@ -26,7 +23,6 @@ To add a download client switch to Settings/Download Clients add your selected t
 > security: when possible use dedicated credentials to authenticate to your torrent client.
 
 ## Prowlarr
----
 To connect Radarr & Sonarr under Settings/Apps add the following two applications with this configuration
 - Prowlarr Server: http://prowlarr-service:9696
 - Radarr Server: http://radarr-service:7878
@@ -36,7 +32,6 @@ ApiKeys for both Applications can be found in the respective UI under Settings/G
 
 
 ## Applying all resources
----
 kubectl create ns jellyfin <br>
 kubectl apply -f jellyfin_server/ <br>
 kubectl apply -f prowlarr_server/ <br>
@@ -44,7 +39,6 @@ kubectl apply -f sonarr_server/ <br>
 kubectl apply -f radarr_server/ <br>
 
 ## Deleting all resources
----
 kubectl delete -f jellyfin_server/ <br>
 kubectl delete -f prowlarr_server/ <br>
 kubectl delete -f radarr_server/ <br>
@@ -53,7 +47,6 @@ kubectl delete ns jellyfin <br>
 
 
 ## Security
----
 ### Network Policies
 Following communication is allowed by default further communication will require you to edit the network policies. More information can be found under: [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
@@ -65,7 +58,6 @@ Following communication is allowed by default further communication will require
 | Egress  | jellyfin-service | sonarr-service | 8989 | tcp
 
 ## Troubleshooting
----
 ### No Disk Space
 Should you encounter a jammed disk switch to your root directory and from there run the command ```sudo du -xd 1``` keep doing so until you reach the directory jamming your system and ensure you delete it properly by running ```sudo rm -rf /dir```
 
